@@ -1,11 +1,11 @@
 {
   "name": "lgtmify",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "LGTM generator",
   "bin": "bin/index.js",
-  "main": "bin/index.js",
   "scripts": {
-    "test": "mocha -R spec ./test --recursive"
+    "test": "mocha -R spec ./test --recursive",
+    "doc": "jsdoc -d docs -r ./lib"
   },
   "repository": {
     "type": "git",
@@ -16,9 +16,11 @@
   "bugs": {
     "url": "https://github.com/mgoldchild/lgtmify/issues"
   },
+  "preferGlobal": true,
   "homepage": "https://github.com/mgoldchild/lgtmify#readme",
   "devDependencies": {
-    "mocha": "^2.3.3"
+    "mocha": "^2.3.3",
+    "jsdoc": "^3.4.0"
   },
   "dependencies": {
     "async": "^1.5.0",
@@ -30,7 +32,8 @@
   "keyword": [
     "lgtm",
     "lgtmify",
-    "opencv"
-  ],
-  "preferGlobal": true
+    "opencv",
+    "gm",
+    "face"
+  ]
 }

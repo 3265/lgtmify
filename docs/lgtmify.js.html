@@ -1,4 +1,32 @@
-/**
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: lgtmify.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: lgtmify.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
  * @module lgtmify
  */
 
@@ -94,7 +122,7 @@ Lgtmify.prototype.getLargestHistogram = function ( histograms, callback ) {
   maxRect.maxv = 0;
   _.each( histograms, function ( histogram, index ) {
     candidate = self.getLargestRectangularArea( index, histogram );
-    if ( candidate.width < candidate.height ) return;
+    if ( candidate.width &lt; candidate.height ) return;
     if ( candidate.maxv >= maxRect.maxv ) {
       maxRect = candidate;
     }
@@ -118,11 +146,11 @@ Lgtmify.prototype.getLargestRectangularArea = function ( rowNo, histogram ) {
     var rect = {};
     rect.height = value;
     rect.pos = index;
-    if (_.isEmpty(stack) && rect.height <= rowNo) return stack.push( rect );
-    if ( _.last(stack).height < rect.height ) return stack.push( rect );
+    if (_.isEmpty(stack) &amp;&amp; rect.height &lt;= rowNo) return stack.push( rect );
+    if ( _.last(stack).height &lt; rect.height ) return stack.push( rect );
     if ( _.last(stack).height > rect.height ) {
       var target = index;
-      while ( !_.isEmpty(stack) && _.last(stack).height >= rect.height){
+      while ( !_.isEmpty(stack) &amp;&amp; _.last(stack).height >= rect.height){
         var pre = _.last(stack);
         stack.pop();
         var area = pre.height * (index - pre.pos);
@@ -163,10 +191,10 @@ Lgtmify.prototype.createMatrix = function(faceSquaresInfo) {
       offset.x = xindex + 1;
       matrix[yindex][xindex] = 0;
       _.some( faceSquaresInfo, function ( faceSquare ) {
-        if (offset.y >= faceSquare.miny &&
-            offset.y <= faceSquare.maxy &&
-            offset.x >= faceSquare.minx &&
-            offset.x <= faceSquare.maxx) {
+        if (offset.y >= faceSquare.miny &amp;&amp;
+            offset.y &lt;= faceSquare.maxy &amp;&amp;
+            offset.x >= faceSquare.minx &amp;&amp;
+            offset.x &lt;= faceSquare.maxx) {
           matrix[yindex][xindex] = self.FACE_BLOCK_INNER;
           return true;
         } else {
@@ -207,12 +235,11 @@ Lgtmify.prototype.createHistograms = function (matrix) {
  * @param {object} maxRect
  */
 Lgtmify.prototype.getLGTMInfo = function (maxRect) {
-  var hasFace = !!maxRect.maxv;
-  if (!hasFace) {
+  if ( maxRect.maxv === 0) {
     maxRect.width = this.xl;
-    maxRect.height = this.yl;
+    maxRect.height = this.yl / 2;
     maxRect.mix = 0;
-    maxRect.miny = 0;
+    maxRect.miny = this.yl / 2;
     maxRect.maxx = this.xl;
     maxRect.maxy = this.yl;
   }
@@ -222,18 +249,18 @@ Lgtmify.prototype.getLGTMInfo = function (maxRect) {
   };
   var lgtmAspect = lgtmThenFontSize1.height / lgtmThenFontSize1.width;
   var lgtm = {};
-  if ( lgtmAspect < (maxRect.height / maxRect.width) ) {
-    lgtm.width = ~~maxRect.width;
-    lgtm.height = ~~(lgtmAspect * maxRect.width);
-    lgtm.offsetx = ~~maxRect.minx;
-    lgtm.offsety = ~~(maxRect.maxy - (maxRect.height / 2) + (lgtm.height / 2));
-    lgtm.fontSize = ~~(lgtm.height / lgtmThenFontSize1.width);
+  if ( lgtmAspect &lt; (maxRect.height / maxRect.width) ) {
+    lgtm.width = maxRect.width;
+    lgtm.height = lgtmAspect * maxRect.width;
+    lgtm.offsetx = maxRect.minx;
+    lgtm.offsety = maxRect.maxy - (maxRect.height / 2) + (lgtm.height / 2);
+    lgtm.fontSize = lgtm.height / lgtmThenFontSize1.width;
   } else {
-    lgtm.height = ~~maxRect.height;
-    lgtm.width = ~~(lgtmThenFontSize1.width * maxRect.height / lgtmThenFontSize1.height);
-    lgtm.offsetx = ~~(maxRect.maxx - (maxRect.width / 2) - (lgtm.width / 2));
-    lgtm.offsety = ~~maxRect.maxy;
-    lgtm.fontSize = ~~(lgtm.height / lgtmThenFontSize1.width);
+    lgtm.height = maxRect.height;
+    lgtm.width = lgtmThenFontSize1.width * maxRect.height / lgtmThenFontSize1.height;
+    lgtm.offsetx = maxRect.maxx - (maxRect.width / 2) - (lgtm.width / 2);
+    lgtm.offsety = maxRect.maxy;
+    lgtm.fontSize = lgtm.height / lgtmThenFontSize1.width;
   }
   return lgtm;
 };
@@ -259,3 +286,26 @@ Lgtmify.prototype.paintLGTM = function (lgtm, callback) {
 };
 
 module.exports = Lgtmify;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-lgtmify.html">lgtmify</a></li></ul><h3>Classes</h3><ul><li><a href="module-lgtmify-Lgtmify.html">Lgtmify</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Thu Nov 19 2015 00:18:09 GMT+0900 (JST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
