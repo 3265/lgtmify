@@ -4,11 +4,23 @@ var Lgtmify = require('../../lib/lgtmify.js');
 describe('Lgtmify', function () {
   var lgtmify;
   var expect;
+  var filename = 'aa.png';
+
+  describe('constructor', function () {
+    it('ok', function (done) {
+      assert.doesNotThrow(function() { new Lgtmify(filename); }, Error);
+      done();
+    });
+    it('ok, error', function (done) {
+      assert.throws(function() { new Lgtmify(); }, Error);
+      done();
+    });
+  });
 
   describe('createMatrix', function () {
     var faceSquaresInfo = [];
     beforeEach(function (done) {
-      lgtmify = new Lgtmify();
+      lgtmify = new Lgtmify(filename);
       faceSquaresInfo = [];
       done();
     });
@@ -53,7 +65,7 @@ describe('Lgtmify', function () {
   describe('createHistograms', function () {
     var matrix = [];
     beforeEach(function (done) {
-      lgtmify = new Lgtmify();
+      lgtmify = new Lgtmify(filename);
       matrix = [];
       done();
     });
@@ -97,7 +109,7 @@ describe('Lgtmify', function () {
 
   describe('setImageInfo', function () {
     beforeEach(function (done) {
-      lgtmify = new Lgtmify();
+      lgtmify = new Lgtmify(filename);
       lgtmify.setOpencv({
         readImage: function (a, cb) {
           var size = function() {
@@ -120,7 +132,7 @@ describe('Lgtmify', function () {
 
   describe('getFaceSquaresInfo', function () {
     before(function (done) {
-      lgtmify = new Lgtmify();
+      lgtmify = new Lgtmify(filename);
       lgtmify.setImage({
         detectObject: function (a, b, cb) {
           return cb(null, [
@@ -158,7 +170,7 @@ describe('Lgtmify', function () {
       done();
     });
     it('ok 1', function (done) {
-      lgtmify = new Lgtmify();
+      lgtmify = new Lgtmify(filename);
       rowNo = 0;
       histogram = [0, 1, 1, 0];
       expect = {
@@ -175,7 +187,7 @@ describe('Lgtmify', function () {
       done();
     });
     it('ok 1', function (done) {
-      lgtmify = new Lgtmify();
+      lgtmify = new Lgtmify(filename);
       rowNo = 5;
       histogram = [0, 1, 1, 0, 3, 3, 5];
       expect = {
@@ -195,7 +207,7 @@ describe('Lgtmify', function () {
 
   describe('getLGTMInfo', function () {
     it('ok portrait', function (done) {
-      lgtmify = new Lgtmify();
+      lgtmify = new Lgtmify(filename);
       var lgtm = {
         width: 100,
         height: 300,
@@ -211,7 +223,7 @@ describe('Lgtmify', function () {
       done();
     });
     it('ok landscape', function (done) {
-      lgtmify = new Lgtmify();
+      lgtmify = new Lgtmify(filename);
       var lgtm = {
         width: 300,
         height: 100,
@@ -227,7 +239,7 @@ describe('Lgtmify', function () {
       done();
     });
     it('no face', function (done) {
-      lgtmify = new Lgtmify();
+      lgtmify = new Lgtmify(filename);
       var lgtm = {
         width: 0,
         height: 0,

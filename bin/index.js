@@ -17,6 +17,7 @@ program
     cmdValue = cmd;
   });
 
+program.parse(process.argv);
 
 var bar = new Progress('process[:bar]:percent :etas', {
   complete: green,
@@ -25,11 +26,9 @@ var bar = new Progress('process[:bar]:percent :etas', {
   total: 5
 });
 
-// main process flow
-var lgtmify = new Lgtmify({
-  filename: cmdValue || './sample/Lenna.png'
-});
+var lgtmify = new Lgtmify(cmdValue);
 
+// main process flow
 async.waterfall( [
   function ( next ) {
     lgtmify.setImageInfo( function ( error ) {
