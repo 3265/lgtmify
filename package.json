@@ -1,6 +1,6 @@
 {
   "name": "lgtmify",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "LGTM converter",
   "bin": "bin/index.js",
   "scripts": {
