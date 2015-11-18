@@ -1,7 +1,7 @@
 {
   "name": "lgtmify",
   "version": "1.0.1",
-  "description": "LGTM generator",
+  "description": "LGTM converter",
   "bin": "bin/index.js",
   "scripts": {
     "test": "mocha -R spec ./test --recursive",
@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "async": "^1.5.0",
+    "commander": "^2.9.0",
     "gm": "^1.21.1",
     "opencv": "^3.2.0",
     "progress": "^1.1.8",

@@ -1,11 +1,22 @@
 #!/usr/bin/env node
 
 var async = require('async');
+var program = require('commander');
 var Progress = require('progress');
 var Lgtmify = require( __dirname + '/../lib/lgtmify.js');
+var pkg = require( __dirname + '/../package.json');
 
 var green = '\u001b[42m \u001b[0m';
 var red = '\u001b[41m \u001b[0m';
+
+var cmdValue;
+program
+  .version(pkg.version)
+  .parse(process.argv)
+  .action(function (cmd) {
+    cmdValue = cmd;
+  });
+
 
 var bar = new Progress('process[:bar]:percent :etas', {
   complete: green,
@@ -16,7 +27,7 @@ var bar = new Progress('process[:bar]:percent :etas', {
 
 // main process flow
 var lgtmify = new Lgtmify({
-  filename: process.argv[2] || './sample/Lenna.png'
+  filename: cmdValue || './sample/Lenna.png'
 });
 
 async.waterfall( [
