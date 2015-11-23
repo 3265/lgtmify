@@ -1,24 +1,24 @@
 # LGTMify
 [![NPM](https://nodei.co/npm/lgtmify.png)](https://nodei.co/npm/lgtmify/)
 
-##Overview  
-A LGTM converter written in node. Implemented on node-opencv and node-gm modules.
+## Overview  
+A LGTM converter for terminal. Written in node. Implemented on node-opencv and node-gm modules.
 
 ![sample](https://raw.githubusercontent.com/mgoldchild/lgtmify/master/sample/lgtm-Lenna.png  "sample")
 
-##Install  
+## Install  
 You'll need OpenCV and Graphicsmagick before install LGTMify.
 ```
 $ npm install -g lgtmify
 ```
 
-##Usage  
+## Usage  
 ```
 $ lgtmify /your/image path
 ```
 
-##Contributers  
+## Contributers  
 
-##License  
+## License  
 MIT
 
